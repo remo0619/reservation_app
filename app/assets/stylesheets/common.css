@@ -1,0 +1,22 @@
+header {
+  background-color:antiquewhite;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  justify-self: end;
+  text-align: center;
+}
+
+li {
+  margin: 10px 20px 10px 20px;
+}
+
+.sign-up-button {
+  color: white;
+  background-color: burlywood;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3px;
+  border: none;
+}
