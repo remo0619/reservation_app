@@ -1,5 +1,9 @@
 <h3>マイページ</h3>
 
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
 <table>
   <tr>
     <th>ユーザー名</th>
@@ -10,6 +14,10 @@
     <td><%= current_user.email %></td>
   </tr>
   <tr>
+    <th>自己紹介</th>
+    <td><%= current_user.bio %></td>
+  </tr>
+  <tr>
     <th>パスワード</th>
     <td>**********</td>
   </tr>
@@ -17,6 +25,6 @@
 
 <div>
   <ul>
-    <li><%= link_to "ユーザー設定", edit_user_path(current_user) %></li>
+    <li><%= link_to "アカウント設定", edit_user_path(current_user) %></li>
   </ul>
 </div>

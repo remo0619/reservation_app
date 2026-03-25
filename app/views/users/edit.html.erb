@@ -1,4 +1,4 @@
-<h3>ユーザー設定</h3>
+<h3>アカウント設定</h3>
 <%= form_with model: @user do |f| %>
   <table>
     <tr>
@@ -18,7 +18,7 @@
   <div>
     <ul>
       <li><%= f.submit "更新" %></li>
-      <li><%= link_to "ユーザー一覧", users_path %></li>
+      <li><%= link_to "マイページ", user_path(current_user) %></li>
     </ul>
   </div>
 <% end %>
