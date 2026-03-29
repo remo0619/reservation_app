@@ -6,8 +6,12 @@
       <td><%= f.text_field :name %></td>
     </tr>
     <tr>
-      <th><% f.label :email , "メールアドレス" %></th>
+      <th><%= f.label :email , "メールアドレス" %></th>
       <td><%= f.email_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :bio , "自己紹介" %></th>
+      <td><%= f.text_area :bio %></td>
     </tr>
     <tr>
       <th>パスワード</th>
