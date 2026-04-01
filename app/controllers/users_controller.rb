@@ -1,10 +1,4 @@
 class UsersController < ApplicationController
-  def index
-  end
-  def new
-  end
-  def create
-  end
   def show
     @user = User.find(params[:id])
   end
@@ -15,7 +9,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(params.require(:user).permit(:name, :email, :bio))
+    @user.avatar.attached(params[:user][:avatar]) if @user.avatar.blank?
+    if @user.update(params.require(:user).permit(:name, :email, :bio, :avatar))
       flash[:notice] = "ユーザー情報を更新しました"
       redirect_to user_path(current_user)
     else

@@ -4,6 +4,13 @@
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
 
+<% if @user.avatar.attached? %>
+  <p>
+    <strong><%= User.human_attribute_name(:avatar) %></strong>
+    <%= image_tag @user.avatar.variant(resize: "300x300") %>
+  </p>
+<% end %>
+
 <table>
   <tr>
     <th>ユーザー名</th>

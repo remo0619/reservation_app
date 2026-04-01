@@ -1,5 +1,18 @@
 <h3>アカウント設定</h3>
+
+<% if @user.avatar.attached? %>
+  <p>
+    <strong><%= User.human_attribute_name(:avatar) %></strong>
+    <%= image_tag @user.avatar.variant(resize: "100x100") %>
+  </p>
+<% end %>
+
 <%= form_with model: @user do |f| %>
+  <div>
+    <%= f.label :avatar , "プロフィール画像" %>
+    <%= f.file_field :avatar %>
+  </div>
+
   <table>
     <tr>
       <th><%= f.label :name , "ユーザー名" %></th>
