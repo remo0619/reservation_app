@@ -6,12 +6,20 @@
       <th><%= f.label :avatar , "プロフィール画像" %></th>
       <td>
         <%= f.label :avatar do %>
+          <%= f.file_field :avatar, style: 'display:none', onchange: "previewImage(this)", accept: "image/jpeg,image/gif,image/png" %>
           <% if @user.avatar.attached? && @user.avatar.variable? %>
             <%= image_tag @user.avatar.variant(resize: "100x100"), 
                           id: "preview", 
-                          class: "rounded-circle", 
+                          class: "rounded-circle avatar-image-clickable", 
                           style: "width: 100px; height: 100px; object-fit: cover;" %>
-            <%= f.file_field :avatar, style: 'display:none', onchange: "previewImage(this)" %>
+
+            <% # 画像削除チェックボックス %>
+            <div class="form-check">
+              <%= f.check_box :remove_avatar, class: "form-check-input" %>
+              <%= f.label :remove_avatar, "現在の画像を削除する", class: "form-check-label text-danger" %>
+            </div>
+
+            <% # エラーメッセージ表示 %>
             <% if @user.errors[:avatar].any? %>
               <div class="invalid-feedback d-block small">
                 <% @user.errors.full_messages.each do |message| %>
@@ -19,7 +27,10 @@
                 <% end %>
               </div>
             <% end %>
-          <% end %>  
+          <% else %>
+            <% # 画像が紐付いていない場合、デフォルト画像を表示 %>
+            <%= image_tag "default_avatar.png", id: "preview", size: "100x100", class: "rounded-circle avatar-image-clickable" %>
+          <% end %>
         <% end %>
       </td>
     </tr>

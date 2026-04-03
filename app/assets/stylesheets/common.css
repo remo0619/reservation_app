@@ -20,3 +20,7 @@ li {
   border-radius: 3px;
   border: none;
 }
+
+.avatar-image-clickable {
+  cursor: pointer;
+}

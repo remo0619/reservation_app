@@ -12,7 +12,9 @@
         <%= image_tag @user.avatar.variant(resize: "100x100"), 
                       class: "rounded-circle", 
                       style: "width: 100px; height: 100px; object-fit: cover;" %>
-      <% end %>  
+      <% else %>
+        <%= image_tag "default_avatar.png", size: "100x100", class: "rounded-circle" %>
+      <% end %>
     </td>
   </tr>
   <tr>
