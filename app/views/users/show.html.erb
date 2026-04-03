@@ -9,7 +9,9 @@
     <th>プロフィール画像</th>
     <td>
       <% if @user.avatar.attached? && @user.avatar.variable? %>
-        <%= image_tag @user.avatar.variant(resize: "100x100") %>
+        <%= image_tag @user.avatar.variant(resize: "100x100"), 
+                      class: "rounded-circle", 
+                      style: "width: 100px; height: 100px; object-fit: cover;" %>
       <% end %>  
     </td>
   </tr>

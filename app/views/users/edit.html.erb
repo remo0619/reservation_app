@@ -7,8 +7,11 @@
       <td>
         <%= f.label :avatar do %>
           <% if @user.avatar.attached? && @user.avatar.variable? %>
-            <%= image_tag @user.avatar.variant(resize: "100x100") %>
-            <%= f.file_field :avatar, style: 'display:none' %>
+            <%= image_tag @user.avatar.variant(resize: "100x100"), 
+                          id: "preview", 
+                          class: "rounded-circle", 
+                          style: "width: 100px; height: 100px; object-fit: cover;" %>
+            <%= f.file_field :avatar, style: 'display:none', onchange: "previewImage(this)" %>
             <% if @user.errors[:avatar].any? %>
               <div class="invalid-feedback d-block small">
                 <% @user.errors.full_messages.each do |message| %>
