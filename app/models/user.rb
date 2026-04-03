@@ -6,6 +6,11 @@ class User < ApplicationRecord
   
   has_one_attached :avatar
 
-  validates :avatar, content_type: { in: ["image/jpeg", "image/png", "image/gif"],
-                     messages: "画像ファイルを選択してください"}
+  validates :name, length: { maximum: 20 }, presence: true
+  validates :email, presence: true
+  validates :bio, length: { maximum: 500 }
+
+  validates :avatar, content_type: { in: %w[image/jpeg image/png image/gif],
+                     message: "画像ファイルを選択してください"},
+                     size: { less_than: 5.megabytes, message: "5MBを超える画像はアップロードできません"}
 end

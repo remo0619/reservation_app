@@ -4,10 +4,10 @@
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<% if @user.avatar.attached? %>
+<% if @user.avatar.attached? && @user.avatar.variable? %>
   <p>
-    <strong><%= User.human_attribute_name(:avatar) %></strong>
-    <%= image_tag @user.avatar.variant(resize: "300x300") %>
+    <%= User.human_attribute_name(:avatar) %>
+    <%= image_tag @user.avatar.variant(resize: "100x100") %>
   </p>
 <% end %>
 
