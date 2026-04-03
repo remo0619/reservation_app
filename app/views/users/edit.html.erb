@@ -1,24 +1,22 @@
 <h3>アカウント設定</h3>
 
-<% if @user.avatar.attached? && @user.avatar.variable? %>
-  <p>
-    <%= User.human_attribute_name(:avatar) %>
-    <%= image_tag @user.avatar.variant(resize: "100x100") %>
-  </p>
-<% end %>
-
 <%= form_with model: @user do |f| %>
   <table>
     <tr>
       <th><%= f.label :avatar , "プロフィール画像" %></th>
       <td>
-        <%= f.file_field :avatar %>
-        <% if @user.errors[:avatar].any? %>
-          <div class="invalid-feedback d-block small">
-            <% @user.errors.full_messages.each do |message| %>
-              <%= message %>
+        <%= f.label :avatar do %>
+          <% if @user.avatar.attached? && @user.avatar.variable? %>
+            <%= image_tag @user.avatar.variant(resize: "100x100") %>
+            <%= f.file_field :avatar, style: 'display:none' %>
+            <% if @user.errors[:avatar].any? %>
+              <div class="invalid-feedback d-block small">
+                <% @user.errors.full_messages.each do |message| %>
+                  <%= message %>
+                <% end %>
+              </div>
             <% end %>
-          </div>
+          <% end %>  
         <% end %>
       </td>
     </tr>
