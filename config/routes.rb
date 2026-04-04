@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
   root "home#top"
-  resources :users
+  resources :users do
+    member do
+      get   :edit_account
+      patch :update_account
+
+      get   :edit_profile
+      patch :update_profile
+    end
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

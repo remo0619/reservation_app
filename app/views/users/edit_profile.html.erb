@@ -1,6 +1,6 @@
-<h3>アカウント設定</h3>
+<h3>プロフィール設定</h3>
 
-<%= form_with model: @user do |f| %>
+<%= form_with model: @user, url: update_profile_user_path(current_user), method: :patch do |f| %>
   <table>
     <tr>
       <th><%= f.label :avatar , "プロフィール画像" %></th>
@@ -46,17 +46,6 @@
       </td>
     </tr>
     <tr>
-      <th><%= f.label :email , "メールアドレス" %></th>
-      <td>
-        <%= f.email_field :email %>
-        <% if @user.errors[:email].any? %>
-          <div class="invalid-feedback d-block small">
-            <%= @user.errors.full_messages_for(:email).first %>
-          </div>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
       <th><%= f.label :bio , "自己紹介" %></th>
       <td>
         <%= f.text_area :bio %>
@@ -66,10 +55,6 @@
           </div>
         <% end %>
       </td>
-    </tr>
-    <tr>
-      <th>パスワード</th>
-      <td>**********</td>
     </tr>
   </table>
 

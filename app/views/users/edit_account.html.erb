@@ -1,0 +1,28 @@
+<h3>アカウント設定</h3>
+
+<%= form_with model: @user, url: update_account_user_path(current_user), method: :patch do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :email , "メールアドレス" %></th>
+      <td>
+        <%= f.email_field :email %>
+        <% if @user.errors[:email].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @user.errors.full_messages_for(:email).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th>パスワード</th>
+      <td>**********</td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "更新" %></li>
+      <li><%= link_to "マイページ", user_path(current_user) %></li>
+    </ul>
+  </div>
+<% end %>
