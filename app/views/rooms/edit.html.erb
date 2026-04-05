@@ -1,0 +1,74 @@
+<h3>施設情報編集</h3>
+
+<%= form_with model: @room do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :name, "施設名" %></th>
+      <td>
+        <%= f.text_field :name %>
+        <% if @room.errors[:name].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @room.errors.full_messages_for(:name).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :introduction, "施設詳細" %></th>
+      <td>
+        <%= f.text_area :introduction %>
+        <% if @room.errors[:introduction].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @room.errors.full_messages_for(:introduction).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :price, "料金" %></th>
+      <td>
+        <%= f.text_field :price %>
+        <% if @room.errors[:price].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @room.errors.full_messages_for(:price).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :address, "住所" %></th>
+      <td>
+        <%= f.text_field :address %>
+        <% if @room.errors[:address].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @room.errors.full_messages_for(:address).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :image, "施設画像" %></th>
+      <td>
+        <%= f.label :image do %>
+          <%= f.file_field :image, style: 'display:none', onchange: "previewImage(this)", accept: "image/jpeg,image/gif,image/png" %>
+          <% if @room.image.attached? && @room.image.variable? %>
+            <%= image_tag @room.image.variant(resize: "100x100"), 
+                          id: "preview", 
+                          class: "rounded-circle avatar-image-clickable", 
+                          style: "width: 100px; height: 100px; object-fit: cover;" %>
+          <% else %>
+            <% # 画像が紐付いていない場合、デフォルト画像を表示 %>
+            <%= image_tag "default-image.png", id: "preview", size: "500x250", class: "avatar-image-clickable" %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+  <div>
+    <ul>
+      <li><%= f.submit "保存" %></li>
+      <li><%= link_to "施設を削除", room_path(@room), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }%></li>
+    </ul>
+  </div>
+<% end %>
