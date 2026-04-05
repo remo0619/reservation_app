@@ -45,18 +45,18 @@ class UsersController < ApplicationController
 
   def destroy
   end
-end
 
-private
+  private
 
-def set_user
-  @user = User.find(params[:id])
-end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-def profile_params
-  params.require(:user).permit(:name, :bio, :avatar, :remove_avatar)
-end
+  def profile_params
+    params.require(:user).permit(:name, :bio, :avatar, :remove_avatar)
+  end
 
-def account_params
-  params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+  def account_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
+  end
 end

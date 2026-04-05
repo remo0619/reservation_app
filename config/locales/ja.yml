@@ -8,6 +8,13 @@ ja:
         current_password: "現在のパスワード"
         password: "新しいパスワード"
         password_confirmation: "新しいパスワード（確認）"
+
+      room:
+        name: "施設名"
+        introduction: "施設詳細"
+        price: "料金"
+        address: "住所"
+
     errors:
       messages:
         confirmation: "とパスワードの入力が一致しません"

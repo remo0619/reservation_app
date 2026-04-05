@@ -14,6 +14,7 @@
             <%= current_user.name %>
             <div class="dropdown-menu" id="mypageDropdownMenu">
               <ul class="dropdown-content">
+                <li class="dropdown-item"><%= link_to "施設新規登録", new_room_path %></li>
                 <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user) %></li>
                 <li class="dropdown-item"><%= link_to "アカウント設定", edit_account_user_path(current_user) %></li>
                 <li class="dropdown-item"><%= link_to "プロフィール設定", edit_profile_user_path(current_user) %></li>

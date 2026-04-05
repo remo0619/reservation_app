@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "rooms/index"
   devise_for :users
   root "home#top"
   resources :users do
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
       patch :update_profile
     end
   end
+
+  resources :rooms
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
