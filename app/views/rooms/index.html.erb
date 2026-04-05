@@ -1,31 +1,10 @@
 <div class="container mt-5">
   <div class="row">
+  <h4 class="mb-5">登録施設一覧</h4>
     <% if @rooms.any? %>
-      <h4 class="mb-5"><span class="fw-bold me-2"><%= @rooms.count %></span>件が見つかりました</h4>
-      <% @rooms.each do |room| %>
-        <div class="col-4 mb-4">
-          <%= link_to room_path(room), class: "text-decoration-none" do %>
-            <div class="card h-100">
-              <% if room.image.attached? %>
-                <%= image_tag room.image, class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
-              <% else %>
-                  <%= image_tag "default-image.png", class: "card-img-top", style: "height: 200px; object-fit: cover;" %>
-              <% end %>
-              
-              <div class="card-body">
-                <h5 class="card-title text-truncate"><%= room.name %></h5>
-                <p class="card-text text-muted"><%= room.address %></p>
-                <p class="card-text text-muted">
-                  <%= truncate(room.introduction, length: 50) %>
-                </p>
-                <p class="card-text fw-bold text-danger h4">¥<%= room.price %>~</p>
-              </div>
-            </div>          
-          <% end %>
-        </div>
-      <% end %>
+      <%= render "shared/rooms" %>
     <% else %>
-      <h4 class="mb-5">対象が見つかりませんでした</h4>
+      <h4 class="mb-5">登録した施設はありません</h4>
     <% end %>
   </div>
   </div>
