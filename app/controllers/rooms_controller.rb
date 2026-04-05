@@ -4,6 +4,14 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
+
+    if params[:area].present?
+      @rooms = @rooms.where('address LIKE ?', "%#{params[:area]}%")
+    end
+
+    if params[:keyword].present?
+      @rooms = @rooms.where('name LIKE ? OR introduction LIKE ?', "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+    end
   end
 
   def new

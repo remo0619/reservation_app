@@ -1,5 +1,14 @@
 <main>
   <div class="position-relative overflow-hidden w-100" style="height: 100vh;">
-    <%= image_tag "travel.jpg", class: "w-100 h-100 object-fit-cover position-absolute top-0 start-0"%>
+    <%= image_tag "travel.jpg", class: "w-100 h-100 object-fit-cover position-absolute top-0 start-0 opacity-75"%>
+
+    <div class="position-absolute top-50 start-50 translate-middle">
+      <h1 class="text-white fw-bold mb-4">行きたい場所を見つけよう</h2>
+      <%= form_with url: rooms_path, method: :get do |f| %>
+        <%= f.text_field :area, placeholder: "エリア(都道府県など)", class: "form-control py-3 mb-3 " %>
+        <%= f.text_field :keyword, placeholder: "キーワード(施設名など)", class: "form-control py-3 mb-3" %>
+        <%= f.submit "検索", class: "btn btn-primary w-100 py-3" %>
+      <% end %>
+    </div>
   </div>
 </main>

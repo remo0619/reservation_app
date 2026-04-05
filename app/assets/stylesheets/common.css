@@ -6,6 +6,9 @@ ul {
   list-style-type: none;
 }
 
+.logo {
+  align-items: center;
+}
 .navbar-nav {
   display: flex;
   flex-direction: row;
