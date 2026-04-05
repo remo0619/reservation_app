@@ -2,41 +2,28 @@
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<table>
-  <tr>
-    <th>施設画像</th>
-    <td>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
       <% if @room.image.attached? && @room.image.variable? %>
-        <%= image_tag @room.image.variant(resize: "100x100"), 
-                      class: "rounded-circle", 
-                      style: "width: 100px; height: 100px; object-fit: cover;" %>
+        <%= image_tag @room.image.variant(resize: "600x400") %>
       <% else %>
-        <%= image_tag "default-image.png", size: "100x100", class: "rounded-circle" %>
+        <%= image_tag "default-image.png", size: "600x400" %>
       <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>施設名</th>
-    <td><%= @room.name %></td>
-  </tr>
-  <tr>
-    <th>施設詳細</th>
-    <td><%= @room.introduction %></td>
-  </tr>
-  <tr>
-    <th>料金</th>
-    <td><%= @room.price %></td>
-  </tr>
-  <tr>
-    <th>住所</th>
-    <td><%= @room.address %></td>
-  </tr>
-</table>
+    </div>
 
-<div>
-  <ul>
-    <% if current_user.id == @room.user_id %>      
-      <li><%= link_to "編集", edit_room_path(@room) %></li>
-    <% end %>
-  </ul>
+    <div class="col-md-6">
+      <h1 class="mb-3 d-flex justify-content-between align-items-center">
+        <%= @room.name %><span class="fw-bold text-danger">¥<%= @room.price %>~</span>
+      </h1>
+      <p class="text-muted mb-4"><%= @room.address %></p>
+      <p class="mb-3"><%= @room.introduction %></p>
+      <div class="mt-4">
+        <% if user_signed_in? && current_user.id == @room.user_id %>
+          <%= link_to "編集する", edit_room_path(@room), class: "btn btn-outline-secondary px-4" %>
+        <% end %>
+        <%= link_to "戻る", :back, class: "btn btn-link text-secondary" %>
+      </div>      
+    </div>
+  </div>
 </div>
