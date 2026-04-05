@@ -2,7 +2,13 @@
   <p class="notice"><%= flash[:notice] %></p>
 <% end %>
 
-<div class="container mt-5">
+<div class="container mt-3">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <%= link_to "戻る", :back, class: "btn btn-outline-secondary" %>   
+    <% if user_signed_in? && current_user.id == @room.user_id %>
+      <%= link_to "編集する", edit_room_path(@room), class: "btn btn-outline-secondary px-4" %>
+    <% end %>
+  </div>      
   <div class="row">
     <div class="col-md-6">
       <% if @room.image.attached? && @room.image.variable? %>
@@ -18,12 +24,26 @@
       </h1>
       <p class="text-muted mb-4"><%= @room.address %></p>
       <p class="mb-3"><%= @room.introduction %></p>
-      <div class="mt-4">
-        <% if user_signed_in? && current_user.id == @room.user_id %>
-          <%= link_to "編集する", edit_room_path(@room), class: "btn btn-outline-secondary px-4" %>
-        <% end %>
-        <%= link_to "戻る", :back, class: "btn btn-link text-secondary" %>
-      </div>      
+
+      <%= form_with model: @reservation do |f| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.label :checkin_date, "チェックイン" %>
+            <%= f.date_field :checkin_date, placeholder: "チェックイン日", class: "form-control"%>
+          </div>
+          <div class="col-md-4">
+            <%= f.label :checkout_date, "チェックアウト" %>
+            <%= f.date_field :checkout_date, placeholder: "チェックアウト日", class: "form-control"%>
+          </div>
+          <div class="col-md-4">
+            <%= f.label :people, "人数" %>
+            <%= f.number_field :people, value: 1,min: 1, class: "form-control"%>
+          </div>
+          <div class="col-md-12 mt-3">
+            <%= f.submit "予約する", class: "btn btn-primary w-100" %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
