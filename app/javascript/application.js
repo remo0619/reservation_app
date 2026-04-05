@@ -15,19 +15,23 @@ window.previewImage = function(input) {
 }
 
 // ヘッダーのユーザー名クリックでドロップダウンメニュー表示
-window.addEventListener('turbo:load', () => {
+
+const initMenu = () => {
   const btn = document.getElementById('mypageBtnContainer');
   const menu = document.getElementById('mypageDropdownMenu');
 
   if (btn && menu) {
-    btn.addEventListener('click', () => {
+    btn.onclick = (e) => {
       menu.classList.toggle('show');
-    });
+    };
 
-    document.addEventListener('click', (e) => {
+    document.onclick = (e) => {
       if (!btn.contains(e.target)) {
         menu.classList.remove('show');
       }
-    });
+    };
   }
-});
+};
+
+window.addEventListener('turbo:load', initMenu);
+window.addEventListener('turbo:render', initMenu);

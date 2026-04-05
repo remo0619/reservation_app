@@ -14,9 +14,40 @@
       </td>
     </tr>
     <tr>
-      <th>パスワード</th>
-      <td>**********</td>
+      <th><%= f.label :current_password, "現在のパスワード" %></th>
+      <td>
+        <%= f.password_field :current_password %>
+        <small class="text-muted d-block">変更する場合のみ入力してください</small>
+        <% if @user.errors[:password].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @user.errors.full_messages_for(:password).first %>
+          </div>
+        <% end %>
+      </td>
     </tr>
+    <tr>
+      <th><%= f.label :password, "新しいパスワード" %></th>
+      <td>
+        <%= f.password_field :password %>
+        <% if @user.errors[:password].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @user.errors.full_messages_for(:password).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th><%= f.label :password_confirmation, "新しいパスワード（確認）" %></th>
+      <td>
+        <%= f.password_field :password_confirmation %>
+        <% if @user.errors[:password_confirmation].any? %>
+          <div class="invalid-feedback d-block small">
+            <%= @user.errors.full_messages_for(:password_confirmation).first %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+
   </table>
 
   <div>

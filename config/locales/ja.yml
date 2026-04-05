@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: "ユーザー名"
+        bio: "自己紹介"
+        email: "メールアドレス"
+        current_password: "現在のパスワード"
+        password: "新しいパスワード"
+        password_confirmation: "新しいパスワード（確認）"
+    errors:
+      messages:
+        confirmation: "とパスワードの入力が一致しません"
