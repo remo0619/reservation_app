@@ -13,11 +13,11 @@
         </p>
         <p class="d-flex justify-content-between border-bottom pb-2">
           <span class="text-muted">チェックイン</span>
-          <span><%= @reservation.checkin_date %></span>
+          <span><%= @reservation.checkin_date.strftime("%Y/%m/%d") %></span>
         </p>
         <p class="d-flex justify-content-between border-bottom pb-2">
           <span class="text-muted">チェックアウト</span>
-          <span><%= @reservation.checkout_date %></span>
+          <span><%= @reservation.checkout_date.strftime("%Y/%m/%d") %></span>
         </p>
         <p class="d-flex justify-content-between border-bottom pb-2">
           <span class="text-muted">ご利用日数</span>

@@ -17,9 +17,10 @@
             <%= current_user.name %>
             <div class="dropdown-menu" id="mypageDropdownMenu">
               <ul class="dropdown-content">
-                <li class="dropdown-item"><%= link_to "施設新規登録", new_room_path %></li>
                 <li class="dropdown-item"><%= link_to "マイページ", user_path(current_user) %></li>
+                <li class="dropdown-item"><%= link_to "施設新規登録", new_room_path %></li>
                 <li class="dropdown-item"><%= link_to "登録施設一覧", rooms_path %></li>
+                <li class="dropdown-item"><%= link_to "予約済み施設一覧", reservations_path %></li>
                 <li class="dropdown-item"><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></li>
               </ul>
             </div>

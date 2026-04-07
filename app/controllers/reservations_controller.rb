@@ -3,6 +3,7 @@ class ReservationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @reservations = current_user.reservations.includes(:room).order(created_at: :desc)
   end
 
   def new
@@ -26,12 +27,22 @@ class ReservationsController < ApplicationController
   end
 
   def edit
+    @room = @reservation.room
   end
 
   def update
+    if @reservation.update(reservation_params)
+      flash[:notice] = "予約情報を更新しました"
+      redirect_to reservations_path(@reservation.room)
+    else
+      render "edit", status: :unprocessable_entity
+    end
   end
 
   def destroy
+    @reservation.destroy
+    flash[:notice] = "予約情報を削除しました"
+    redirect_to reservations_path(@reservation.room), status: :see_other
   end
 
   private

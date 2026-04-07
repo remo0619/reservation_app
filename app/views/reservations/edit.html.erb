@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2 class="text-center fw-bold mb-4">予約の変更</h2>
+      
+      <div class="alert alert-info">
+        <p>施設名:<%= @room.name %></p>
+        <p>料金: ¥<%= @room.price %></p>
+      </div>
+
+      <%= form_with model: @reservation, local: true do |f| %>
+        <div class="mb-3">
+          <%= f.label :checkin_date, "チェックイン", class: "form-label" %>
+          <%= f.date_field :checkin_date, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :checkout_date, "チェックアウト", class: "form-label" %>
+          <%= f.date_field :checkout_date, class: "form-control" %>
+        </div>
+
+        <div class="mb-4">
+          <%= f.label :people, "人数", class: "form-label" %>
+          <%= f.number_field :people, min: 1, class: "form-control" %>
+        </div>
+
+        <%= f.hidden_field :room_id, value: @room.id %>
+
+        <div class="d-grid gap-2">
+          <%= f.submit "予約を変更する", class: "btn btn-primary btn-lg" %>
+          <%= link_to "この予約を完全にキャンセルする", 
+              reservation_path(@reservation), 
+              data: { turbo_method: :delete, turbo_confirm: "本当に予約をキャンセルしてもよろしいですか？" }, 
+              class: "btn btn-danger" %>
+          <%= link_to "一覧へ戻る", reservations_path, class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
