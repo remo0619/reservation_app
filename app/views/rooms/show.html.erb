@@ -25,7 +25,7 @@
       <p class="text-muted mb-4"><%= @room.address %></p>
       <p class="mb-3"><%= @room.introduction %></p>
 
-      <%= form_with model: @reservation do |f| %>
+      <%= form_with model: @reservation, url: confirm_reservations_path, data: { turbo: false } do |f| %>
         <div class="row">
           <div class="col-md-4">
             <%= f.label :checkin_date, "チェックイン" %>
@@ -39,6 +39,7 @@
             <%= f.label :people, "人数" %>
             <%= f.number_field :people, value: 1,min: 1, class: "form-control"%>
           </div>
+          <%= f.hidden_field :room_id, value: @room.id %>
           <div class="col-md-12 mt-3">
             <%= f.submit "予約する", class: "btn btn-primary w-100" %>
           </div>

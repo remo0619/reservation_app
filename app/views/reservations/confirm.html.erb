@@ -1,0 +1,50 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <h2 class="text-center fw-bold mb-4">予約内容の確認</h2>
+
+      <% day_count = (@reservation.checkout_date - @reservation.checkin_date).to_i %>
+      <% total_price = @room.price * @reservation.people * day_count %>
+
+      <div class="mb-4">
+        <p class="d-flex justify-content-between border-bottom pb-2">
+          <span class="text-muted">施設名</span>
+          <span class="fw-bold"><%= @room.name %></span>
+        </p>
+        <p class="d-flex justify-content-between border-bottom pb-2">
+          <span class="text-muted">チェックイン</span>
+          <span><%= @reservation.checkin_date %></span>
+        </p>
+        <p class="d-flex justify-content-between border-bottom pb-2">
+          <span class="text-muted">チェックアウト</span>
+          <span><%= @reservation.checkout_date %></span>
+        </p>
+        <p class="d-flex justify-content-between border-bottom pb-2">
+          <span class="text-muted">ご利用日数</span>
+          <span><%= day_count %> 日</span>
+        </p>
+        <p class="d-flex justify-content-between border-bottom pb-2">
+          <span class="text-muted">ご利用人数</span>
+          <span><%= @reservation.people %> 名</span>
+        </p>
+      </div>
+
+      <div class="alert alert-secondary text-center py-3">
+        <span class="fs-5">お支払い金額：</span>
+        <span class="fs-3 fw-bold text-danger">¥<%= total_price %></span>
+      </div>
+
+      <%= form_with model: @reservation, url: reservations_path do |f| %>
+        <%= f.hidden_field :checkin_date %>
+        <%= f.hidden_field :checkout_date %>
+        <%= f.hidden_field :people %>
+        <%= f.hidden_field :room_id %>
+
+        <div class="d-grid gap-2 mt-4">
+          <%= f.submit "予約を確定する", class: "btn btn-primary btn-lg fw-bold" %>
+          <%= link_to "キャンセル", :back, class: "btn btn-outline-secondary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
