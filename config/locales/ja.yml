@@ -15,6 +15,11 @@ ja:
         price: "料金"
         address: "住所"
 
+      reservation:
+        checkin_date: "チェックイン日"
+        checkout_date: "チェックアウト日"
+        people: "人数"
+
     errors:
       messages:
         confirmation: "とパスワードの入力が一致しません"

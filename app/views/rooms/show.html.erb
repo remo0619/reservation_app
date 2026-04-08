@@ -30,14 +30,29 @@
           <div class="col-md-4">
             <%= f.label :checkin_date, "チェックイン" %>
             <%= f.date_field :checkin_date, placeholder: "チェックイン日", class: "form-control"%>
+            <% if @reservation.errors[:checkin_date].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:checkin_date).first %>
+              </div>
+            <% end %>
           </div>
           <div class="col-md-4">
             <%= f.label :checkout_date, "チェックアウト" %>
             <%= f.date_field :checkout_date, placeholder: "チェックアウト日", class: "form-control"%>
+            <% if @reservation.errors[:checkout_date].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:checkout_date).first %>
+              </div>
+            <% end %>
           </div>
           <div class="col-md-4">
             <%= f.label :people, "人数" %>
             <%= f.number_field :people, value: 1,min: 1, class: "form-control"%>
+            <% if @reservation.errors[:people].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:people).first %>
+              </div>
+            <% end %>
           </div>
           <%= f.hidden_field :room_id, value: @room.id %>
           <div class="col-md-12 mt-3">
