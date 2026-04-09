@@ -1,0 +1,65 @@
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="container mt-3 mb-5">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <%= link_to "戻る", :back, class: "btn btn-outline-secondary" %>   
+    <% if user_signed_in? && current_user.id == @room.user_id %>
+      <%= link_to "編集する", edit_room_path(@room), class: "btn btn-outline-secondary px-4" %>
+    <% end %>
+  </div>      
+  <div class="row">
+    <div class="col-md-6">
+      <% if @room.image.attached? && @room.image.variable? %>
+        <%= image_tag @room.image.variant(resize: "600x400") %>
+      <% else %>
+        <%= image_tag "default-image.png", size: "600x400" %>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <h1 class="mb-3 d-flex justify-content-between align-items-center">
+        <%= @room.name %><span class="fw-bold text-danger">¥<%= @room.price %>~</span>
+      </h1>
+      <p class="text-muted mb-4"><%= @room.address %></p>
+      <p class="mb-3"><%= @room.introduction %></p>
+
+      <%= form_with model: @reservation, url: confirm_reservations_path, data: { turbo: false } do |f| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= f.label :checkin_date, "チェックイン" %>
+            <%= f.date_field :checkin_date, placeholder: "チェックイン日", class: "form-control"%>
+            <% if @reservation.errors[:checkin_date].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:checkin_date).first %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= f.label :checkout_date, "チェックアウト" %>
+            <%= f.date_field :checkout_date, placeholder: "チェックアウト日", class: "form-control"%>
+            <% if @reservation.errors[:checkout_date].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:checkout_date).first %>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <%= f.label :people, "人数" %>
+            <%= f.number_field :people, value: 1,min: 1, class: "form-control"%>
+            <% if @reservation.errors[:people].any? %>
+              <div class="invalid-feedback d-block small">
+                <%= @reservation.errors.full_messages_for(:people).first %>
+              </div>
+            <% end %>
+          </div>
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <div class="col-md-12 mt-3">
+            <%= f.submit "予約する", class: "btn btn-primary w-100" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

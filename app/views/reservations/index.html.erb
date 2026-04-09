@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h2 class="mb-4 fw-bold">予約済み施設一覧</h2>
+
+  <% if flash[:notice] %>
+    <p class="notice"><%= flash[:notice] %></p>
+  <% end %>
+
+  <% if @reservations.any? %>
+    <div class="border-top">
+      <% @reservations.each do |res| %>
+        <div class="row align-items-center py-3 border-bottom mx-0">
+          
+          <div class="col-md-2 text-center">
+            <% if res.room.image.attached? %>
+              <%= image_tag res.room.image.variant(resize: "120x80") %>
+            <% else %>
+              <%= image_tag "default-image.png", size: "120x80" %>
+            <% end %>
+          </div>
+
+          <div class="col-md-2">
+            <h6 class="mb-1 fw-bold">
+              <%= link_to res.room.name, edit_reservation_path(res) %>
+            </h5>
+          </div>
+
+          <div class="col-md-3">
+            <h5 class="mb-1">
+              <p class="text-muted fs-6"><%= truncate(res.room.introduction, length: 30) %></p>
+            </h5>
+          </div>
+
+          <div class="col-md-4">
+            <div class="d-flex flex-column">
+              <span class="small text-secondary">予約日程</span>
+              <span class="fw-bold">
+                <%= res.checkin_date.strftime("%Y/%m/%d") %> 〜 <%= res.checkout_date.strftime("%Y/%m/%d") %>
+              </span>
+              <span class="small text-secondary mt-1">
+                <%= res.people %> 名様 / <%= (res.checkout_date - res.checkin_date).to_i %> 泊
+              </span>
+              <span class="small">予約確定日時：<%= res.created_at.strftime("%Y/%m/%d %H:%M") %></span>
+            </div>
+          </div>
+
+          <div class="col-md-1">
+            <span class="small text-secondary d-block">合計金額</span>
+            <% total_price = res.room.price * res.people * (res.checkout_date - res.checkin_date).to_i %>
+            <span class="fs-5 fw-bold text-danger">¥<%= total_price%></span>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="text-center py-5">
+      <p class="text-muted fs-5">まだ予約した施設はありません。</p>
+    </div>
+  <% end %>
+</div>

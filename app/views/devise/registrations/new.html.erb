@@ -1,0 +1,69 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      
+      <div class="card shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="mb-0 fw-bold text-center">ユーザー新規登録</h4>
+        </div>
+        
+        <div class="card-body p-4">
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+            <div class="mb-3">
+              <%= f.label :name, "ユーザー名", class: "form-label fw-bold" %>
+              <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "ユーザー名を入力" %>
+              <% if @user.errors[:name].any? %>
+                <div class="invalid-feedback d-block small">
+                  <%= @user.errors.full_messages_for(:name).first %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :email, "メールアドレス", class: "form-label fw-bold" %>
+              <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "example@mail.com" %>
+              <% if @user.errors[:email].any? %>
+                <div class="invalid-feedback d-block small">
+                  <%= @user.errors.full_messages_for(:email).first %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :password, "パスワード", class: "form-label fw-bold" %>
+              <% if @minimum_password_length %>
+                <span class="small text-muted">(<%= @minimum_password_length %> 文字以上)</span>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "パスワードを入力" %>
+              <% if @user.errors[:password].any? %>
+                <div class="invalid-feedback d-block small">
+                  <%= @user.errors.full_messages_for(:password).first %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :password_confirmation, "パスワード（確認用）", class: "form-label fw-bold" %>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "もう一度入力してください" %>
+              <% if @user.errors[:password_confirmation].any? %>
+                <div class="invalid-feedback d-block small">
+                  <%= @user.errors.full_messages_for(:password_confirmation).first %>
+                </div>
+              <% end %>
+            </div>
+
+            <div class="d-grid gap-2 mb-3">
+              <%= f.submit "新しいアカウントを作成", class: "btn btn-primary btn-lg fw-bold" %>
+            </div>
+          <% end %>
+
+          <div class="text-center border-top pt-3">
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

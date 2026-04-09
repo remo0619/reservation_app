@@ -1,0 +1,25 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name: "ユーザー名"
+        bio: "自己紹介"
+        email: "メールアドレス"
+        current_password: "現在のパスワード"
+        password: "新しいパスワード"
+        password_confirmation: "新しいパスワード（確認）"
+
+      room:
+        name: "施設名"
+        introduction: "施設詳細"
+        price: "料金"
+        address: "住所"
+
+      reservation:
+        checkin_date: "チェックイン日"
+        checkout_date: "チェックアウト日"
+        people: "人数"
+
+    errors:
+      messages:
+        confirmation: "とパスワードの入力が一致しません"
